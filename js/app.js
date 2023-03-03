@@ -12,13 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const inputAsunto = document.querySelector('#asunto');
   const inputMensaje = document.querySelector('#mensaje');
   const formulario = document.querySelector('#formulario');
+  const btnSubmit = document.querySelector("#formulario button[type='submit']");
 
   // Asignar eventos
 
-  // se ejecuta al abandonar un campo
-  inputEmail.addEventListener('blur', validar); //se llama hasta que suceda evento
-  inputAsunto.addEventListener('blur', validar);
-  inputMensaje.addEventListener('blur', validar);
+  // se ejecuta al abandonar un campo (blur)(input)tiempo real
+  inputEmail.addEventListener('input', validar); //se llama hasta que suceda evento
+  inputAsunto.addEventListener('input', validar);
+  inputMensaje.addEventListener('input', validar);
 
   // funciones
   function validar(evento) {
@@ -30,6 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
         `El Campo ${evento.target.id} es obligatorio`,
         referenciaDiv
       );
+      email[evento.target.name] = ''; //vaciar propiedad
+      comprobarEmail();
       return;
     }
 
@@ -37,6 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // enviamos el valor del inpunt del evento seleccionado
     if (evento.target.id === 'email' && !validarEmail(evento.target.value)) {
       mostrarAlerta(`El email no es valido`, evento.target.parentElement);
+      email[evento.target.name] = ''; //vaciar propiedad
+      comprobarEmail();
       return;
     }
 
@@ -81,6 +86,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function comprobarEmail() {
     // validar los valores del objeto en un nuevo arreglo, y que incluya un "" que devuelva true, o false si no tiene ningun ""
-    console.log(Object.values(email).includes(''));
+    if (Object.values(email).includes('')) {
+      //true
+      btnSubmit.classList.add('opacity-50');
+      btnSubmit.disable = true;
+
+      return;
+    }
+    btnSubmit.classList.remove('opacity-50');
+    btnSubmit.disable = false;
   }
 });
