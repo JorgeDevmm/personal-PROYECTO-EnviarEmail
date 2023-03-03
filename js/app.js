@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Seleccionar los elementos de la interfaz
   const inputEmail = document.querySelector('#email');
+  const inputCC = document.querySelector('#cc');
   const inputAsunto = document.querySelector('#asunto');
   const inputMensaje = document.querySelector('#mensaje');
   const formulario = document.querySelector('#formulario');
@@ -20,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // se ejecuta al abandonar un campo (blur)(input)tiempo real
   inputEmail.addEventListener('input', validar); //se llama hasta que suceda evento
+  inputCC.addEventListener('input', validar); //se llama hasta que suceda evento
   inputAsunto.addEventListener('input', validar);
   inputMensaje.addEventListener('input', validar);
 
@@ -75,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // referencia del elemento div del evento id
     const referenciaDiv = evento.target.parentElement;
 
-    if (evento.target.value.trim() == '') {
+    if (evento.target.value.trim() == '' && !evento.target.id == 'cc') {
       mostrarAlerta(
         `El Campo ${evento.target.id} es obligatorio`,
         referenciaDiv
@@ -85,11 +87,24 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
+    // si es el evento con id cc y esta vacio limpiamos la alerta
+    if (evento.target.value.trim() == '' && evento.target.id == 'cc') {
+      limpiarAlerta(referenciaDiv);
+      return;
+    }
+
     // validamos tanto el id del evento y que la función devuelva false
     // enviamos el valor del inpunt del evento seleccionado
     if (evento.target.id === 'email' && !validarEmail(evento.target.value)) {
       mostrarAlerta(`El email no es valido`, evento.target.parentElement);
       email[evento.target.name] = ''; //vaciar propiedad
+      comprobarEmail();
+      return;
+    }
+
+    // agregamos nuevo campo cc
+    if (evento.target.id === 'cc' && !validarEmail(evento.target.value)) {
+      mostrarAlerta(`El cc no es valido`, evento.target.parentElement);
       comprobarEmail();
       return;
     }
