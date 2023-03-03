@@ -29,11 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     evento.preventDefault();
 
     // Reiniciar el objeto
-    email.email = '';
-    email.asunto = '';
-    email.mensaje = '';
-    formulario.reset(); //resetea formulario, método propio
-    comprobarEmail();
+    resetFormulario();
   });
 
   // funciones
@@ -43,6 +39,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     spinner.classList.add('flex');
     spinner.classList.remove('hidden');
+
+    // pasar un determinado tiempo y si invierte
+    setTimeout(() => {
+      spinner.classList.remove('flex');
+      spinner.classList.add('hidden');
+
+      // Reiniciar el objeto
+      resetFormulario();
+    }, 3000);
   }
 
   function validar(evento) {
@@ -118,5 +123,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     btnSubmit.classList.remove('opacity-50');
     btnSubmit.disabled = false;
+  }
+
+  function resetFormulario() {
+    // Reiniciar el objeto
+    email.email = '';
+    email.asunto = '';
+    email.mensaje = '';
+    formulario.reset(); //resetea formulario, método propio
+    comprobarEmail();
   }
 });
