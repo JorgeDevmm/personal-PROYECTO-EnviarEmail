@@ -47,6 +47,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Reiniciar el objeto
       resetFormulario();
+
+      // Crear una alerta
+      const alertaExito = document.createElement('P');
+      alertaExito.classList.add(
+        'bg-green-500',
+        'text-white',
+        'p-2',
+        'text-center',
+        'rounded-lg',
+        'mt-10',
+        'font-bold',
+        'text-sm',
+        'uppercase'
+      );
+      alertaExito.textContent = 'Mensaje enviado correctamente';
+      // agregando al formulario
+      formulario.appendChild(alertaExito);
+
+      setTimeout(() => {
+        alertaExito.remove();
+      }, 3000);
     }, 3000);
   }
 
