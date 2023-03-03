@@ -14,6 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // funciones
   function validar(evento) {
-    console.log(evento.target.value);
+    if (evento.target.value == '') {
+      console.log(evento.target.value.trim());
+    } else {
+      console.log('esta llleno');
+    }
   }
 });
