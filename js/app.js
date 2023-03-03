@@ -26,6 +26,13 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
+    // validamos tanto el id del evento y que la función devuelva false
+    // enviamos el valor del inpunt del evento seleccionado
+    if (evento.target.id === 'email' && !validarEmail(evento.target.value)) {
+      mostrarAlerta(`El email no es valido`, evento.target.parentElement);
+      return;
+    }
+
     limpiarAlerta(referenciaDiv);
   }
 
@@ -49,5 +56,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (alerta) {
       alerta.remove();
     }
+  }
+
+  function validarEmail(email) {
+    // expresión regular
+    const regex = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+    const resultado = regex.test(email); //devuelve true o false
+
+    return resultado;
   }
 });
