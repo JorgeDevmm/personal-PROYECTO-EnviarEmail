@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const formulario = document.querySelector('#formulario');
   const btnSubmit = document.querySelector("#formulario button[type='submit']");
   const btnReset = document.querySelector("#formulario button[type='reset']");
+  const spinner = document.querySelector('#spinner');
 
   // Asignar eventos
 
@@ -21,6 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
   inputEmail.addEventListener('input', validar); //se llama hasta que suceda evento
   inputAsunto.addEventListener('input', validar);
   inputMensaje.addEventListener('input', validar);
+
+  formulario.addEventListener('submit', enviarEmail); //al enviar
 
   btnReset.addEventListener('click', (evento) => {
     evento.preventDefault();
@@ -34,6 +37,14 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // funciones
+
+  function enviarEmail(evento) {
+    evento.preventDefault();
+
+    spinner.classList.add('flex');
+    spinner.classList.remove('hidden');
+  }
+
   function validar(evento) {
     // referencia del elemento div del evento id
     const referenciaDiv = evento.target.parentElement;
@@ -101,11 +112,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (Object.values(email).includes('')) {
       //true
       btnSubmit.classList.add('opacity-50');
-      btnSubmit.disable = true;
+      btnSubmit.disabled = true;
 
       return;
     }
     btnSubmit.classList.remove('opacity-50');
-    btnSubmit.disable = false;
+    btnSubmit.disabled = false;
   }
 });
