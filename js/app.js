@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const inputMensaje = document.querySelector('#mensaje');
   const formulario = document.querySelector('#formulario');
   const btnSubmit = document.querySelector("#formulario button[type='submit']");
+  const btnReset = document.querySelector("#formulario button[type='reset']");
 
   // Asignar eventos
 
@@ -20,6 +21,17 @@ document.addEventListener('DOMContentLoaded', () => {
   inputEmail.addEventListener('input', validar); //se llama hasta que suceda evento
   inputAsunto.addEventListener('input', validar);
   inputMensaje.addEventListener('input', validar);
+
+  btnReset.addEventListener('click', (evento) => {
+    evento.preventDefault();
+
+    // Reiniciar el objeto
+    email.email = '';
+    email.asunto = '';
+    email.mensaje = '';
+    formulario.reset(); //resetea formulario, método propio
+    comprobarEmail();
+  });
 
   // funciones
   function validar(evento) {
