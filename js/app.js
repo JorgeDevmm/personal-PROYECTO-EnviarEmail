@@ -1,5 +1,12 @@
 // evento que cargue todo el html
 document.addEventListener('DOMContentLoaded', () => {
+  // objeto onde llenaremos la inforamción
+  const email = {
+    email: '',
+    asunto: '',
+    mensaje: '',
+  };
+
   // Seleccionar los elementos de la interfaz
   const inputEmail = document.querySelector('#email');
   const inputAsunto = document.querySelector('#asunto');
@@ -34,6 +41,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     limpiarAlerta(referenciaDiv);
+
+    // Asignar los valores en el objeto con los valores del evento
+    email[evento.target.name] = evento.target.value.trim().toLowerCase();
+
+    // Comprobar el objeto de email
+    comprobarEmail();
   }
 
   function mostrarAlerta(mensaje, referenciaDiv) {
@@ -64,5 +77,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultado = regex.test(email); //devuelve true o false
 
     return resultado;
+  }
+
+  function comprobarEmail() {
+    // validar los valores del objeto en un nuevo arreglo, y que incluya un "" que devuelva true, o false si no tiene ningun ""
+    console.log(Object.values(email).includes(''));
   }
 });
