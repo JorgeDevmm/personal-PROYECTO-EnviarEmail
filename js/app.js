@@ -14,10 +14,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // funciones
   function validar(evento) {
-    if (evento.target.value == '') {
-      console.log(evento.target.value.trim());
+    if (evento.target.value.trim() == '') {
+      mostrarAlerta();
     } else {
       console.log('esta llleno');
     }
+  }
+
+  function mostrarAlerta() {
+    // Generar un alerta en HTML
+
+    const error = document.createElement('P');
+    error.textContent = 'Hubo un error...';
+
+    console.log(error);
   }
 });
